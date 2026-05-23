@@ -72,10 +72,20 @@ with col5:
 
 if st.button('Predict Probability'):
     runs_left = target - score
-    balls_left = 120 - (overs*6)
-    wickets = 10 - wickets
-    crr = score/overs
-    rrr = (runs_left*6)/balls_left
+    balls_left = 120 - (overs * 6)
+    wickets_left = 10 - wickets
+
+    # Current Run Rate (CRR)
+    if overs == 0:
+     crr = 0
+    else:
+     crr = score / overs
+
+    # Required Run Rate (RRR)
+    if balls_left == 0:
+     rrr = 0
+    else:
+     rrr = (runs_left * 6) / balls_left
 
     input_df = pd.DataFrame({'batting_team': [batting_team], 'bowling_team':[bowling_team], 'city':[selected_city], 'runs_left': [runs_left], 'balls_left': [balls_left], 'wickets': [wickets], 'total_runs_x':[target], 'crr':[crr], 'rrr':[rrr]})
 
